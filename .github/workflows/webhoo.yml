@@ -1,0 +1,17 @@
+name: Repository Dispatch Hello World
+
+on:
+  repository_dispatch:
+    types: [hello-world-event]
+
+jobs:
+  hello-world:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hello World
+        run: echo "Hello World! イベントタイプ：${{ github.event.action }}"
+      
+      - name: カスタムデータの表示（もしあれば）
+        run: |
+          echo "受信したカスタムデータ："
+          echo "${{ toJson(github.event.client_payload) }}"
